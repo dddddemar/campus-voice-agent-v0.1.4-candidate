@@ -1,0 +1,15 @@
+C-TH-01 交卷说明
+================
+交卷 commit: 7a48432df18c5c85627544661e5127ba3bb916f6
+工程包: dist/campus-voice-agent-v0.1.4-submission.zip（含 .git）
+
+主问题 A：无明确目标时高置信误执行
+最终方案: voice_agent/policy.py（v2）+ runs/after/
+中间方案(保留): evals/candidate/policy_always_clarify.py + runs/experiment_always_clarify/
+Baseline: runs/before/
+计划/报告: EVAL_PLAN.md, REPORT.md
+自建评测/指标: evals/candidate/
+AI session: ai-sessions/
+
+投入时间: 约 120 分钟；环境准备约 5 分钟
+未完成项与已知限制: 见 REPORT.md「投入时间、未完成项与已知限制」
