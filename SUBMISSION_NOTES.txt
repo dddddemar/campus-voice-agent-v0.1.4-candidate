@@ -1,7 +1,10 @@
 C-TH-01 交卷说明
 ================
-交卷 commit: 9934dbfca044784755353b2d4bc85c494ea0ee68
-工程包: dist/campus-voice-agent-v0.1.4-submission.zip（含 .git；交卷以本仓库 HEAD 为准，解压后请 git log -1 核对）
+交卷以仓库 HEAD 为准：请运行 `git rev-parse HEAD` / `git log -1`
+主成果提交（策略/评测/runs/session）：7a48432df18c5c85627544661e5127ba3bb916f6
+说明与报告微调提交：见其后 git log
+
+工程包: dist/campus-voice-agent-v0.1.4-submission.zip（含 .git）
 
 主问题 A：无明确目标时高置信误执行
 最终方案: voice_agent/policy.py（v2）+ runs/after/
