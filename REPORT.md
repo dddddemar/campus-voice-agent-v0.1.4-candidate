@@ -56,7 +56,7 @@ Oracle：`world.target`。主指标 CFF=`ack 且存在错误目标 commit`，分
 - 未优化 `select_model` 路由以冲击「明确低风险 P95≤600ms」下一版目标
 - 未引入 `abstain` 或 busy 模式下的交互代价对照实验
 - 未做真实用户/线上分布验证（本题仅离线合成）
-- 远程仓库推送与交卷链接：待打包/提交步骤完成（见交付动作）
+- 远程仓库推送：当前无配置 remote；已提供本地完整工程包（含 `.git`）见 `SUBMISSION_NOTES.txt` / `dist/*.zip`
 
 **已知限制**
 - 100 条 public 为合成且边界加重，CFF 分子/分母**不可外推**为线上错误率
