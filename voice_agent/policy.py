@@ -1,4 +1,7 @@
 """Current production policies: safe high-risk handling and basic routing already work."""
+from .history_resolve import resolve_structured_reference
+
+
 def select_model(request):
     if request['risk'] == 'high' and request['explicit_target'] is None:
         return 'small'
@@ -11,17 +14,19 @@ def select_model(request):
 
 def choose_action(request, prediction):
     ranked = sorted(prediction['candidates'], key=lambda c: c['confidence'], reverse=True)
-    if request['risk'] == 'high' and request['explicit_target'] is None:
-        return {'kind': 'clarify'}
+    cand_targets = [c['target'] for c in ranked]
     explicit = request['explicit_target']
-    if explicit:
+    if explicit is not None:
         if any(c['target'] == explicit for c in ranked):
             return {'kind': 'execute', 'target': explicit}
         return {'kind': 'clarify'}
-    top = ranked[0]
-    margin = top['confidence'] - (ranked[1]['confidence'] if len(ranked) > 1 else 0)
-    if top['confidence'] >= .8 and margin >= .4:
-        return {'kind': 'execute', 'target': top['target']}
+    # No confirmed target: do not trust model confidence alone (silent wrong executes).
+    # High-risk stays clarify-only. Low-risk may execute only via structured history refs.
+    if request['risk'] == 'high':
+        return {'kind': 'clarify'}
+    resolved = resolve_structured_reference(request, cand_targets)
+    if resolved is not None and resolved in cand_targets:
+        return {'kind': 'execute', 'target': resolved}
     return {'kind': 'clarify'}
 
 

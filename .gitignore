@@ -1,4 +1,5 @@
-runs/
+# Keep caches and local envs out of git; allow runs/ for submission artifacts.
 __pycache__/
 *.pyc
 .venv/
+.DS_Store

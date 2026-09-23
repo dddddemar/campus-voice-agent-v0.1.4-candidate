@@ -1,0 +1,34 @@
+{
+  "policy": "voice_agent.policy",
+  "denominator": 100,
+  "cff": {
+    "numerator": 0,
+    "denominator": 100,
+    "rate": 0.0
+  },
+  "true_task_success": {
+    "numerator": 89,
+    "denominator": 100,
+    "rate": 0.89
+  },
+  "high_risk_wrong_target": {
+    "numerator": 0,
+    "denominator": 37,
+    "rate": 0.0
+  },
+  "clarified": {
+    "numerator": 50,
+    "denominator": 100,
+    "rate": 0.5
+  },
+  "legacy_summary": {
+    "sessions": 100,
+    "legacy_task_success": {
+      "numerator": 89,
+      "denominator": 100,
+      "rate": 0.89
+    },
+    "p95_latency_ms": 1530,
+    "mean_model_cost_usd": 0.00314
+  }
+}

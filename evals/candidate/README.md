@@ -1,7 +1,17 @@
 # 自建评测
 
-在此新增 test_*.py，通过标准库 unittest 执行；test_example.py 只是用法示例，不算完成所选问题的评测。
+主问题 A（歧义高置信误执行）相关：
 
-至少覆盖所选问题的失败、新实例、正常回归及边界/代价。可复制公开场景结构后创建新输入，但要说明为什么预期该行为。目标名称可变化，不依赖原始场景 ID。
+- `test_ambiguous_execute.py`：失败案 / 歧义新实例 / 序数·修订新实例 / 明确指令回归 / 高风险边界 / CFF=0 / 相对一律澄清不退步
+- `ambiguous_scenarios.jsonl`：自建场景（含可解析序数与不可解析「刚才那个」反例）
+- `policy_always_clarify.py`：中间方案（一律澄清），供对照，非最终策略
+- `analyze_cff.py`：CFF 等分子分母指标；`metrics_before.json` / `metrics_always_clarify.json` / `metrics_after.json`
+- 运行目录：`runs/before/`、`runs/experiment_always_clarify/`、`runs/after/`
 
-推荐在独立 analyze.py 中输出带分子、分母的指标 JSON，保存复现命令和结果。不要求固定指标数量或图表。策略只接收运行时 observation/prediction/timeout；world 仅用于评测断言。
+```sh
+uv run --quiet --offline --no-project python -m unittest discover -s evals/candidate
+uv run --quiet --offline --no-project python -m voice_agent.cli \
+  --policy evals/candidate/policy_always_clarify.py --out runs/experiment_always_clarify
+uv run --quiet --offline --no-project python -m voice_agent.cli --out runs/after
+uv run --quiet --offline --no-project python evals/candidate/analyze_cff.py --out evals/candidate/metrics_after.json
+```
